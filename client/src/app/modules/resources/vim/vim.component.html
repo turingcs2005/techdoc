@@ -1,0 +1,226 @@
+<div class="mat-h1">An introduction to Vim</div>
+
+<!-- Mode -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Modes
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>Mode is displayed at the bottom of the screen. All but search mode is existed (to normal mode) 
+    by pressing <span class="emphasize SourceCodePro">Esc</span> key; search mode is exited by pressing 
+    <span class="emphasize SourceCodePro">/ Esc</span>.</div>
+  <ul>
+    <li>Normal mode: the default and most used mode for moving cursor or selecting test. Activated via 
+      <span class="emphasize SourceCodePro">Esc</span> key.</li>
+    <li>Insert mode: the second most used mode. Activated via <span class="emphasize SourceCodePro">a, A, i, I, o, O</span> keys.</li>
+    <li>Replace mode: replace existing text by directly typing over it. Activated via <span class="emphasize SourceCodePro">R</span> key.</li>
+    <li>Visual modes: select text. There're 3 visual modes and they are accessed via
+      <ul>
+        <li><span class="emphasize SourceCodePro">v</span>: standard visual model, i.e. selecting text by character</li>
+        <li><span class="emphasize SourceCodePro">V</span>: visual line model, i.e. selecting text by line</li>
+        <li><span class="emphasize SourceCodePro">Ctrl v</span>: visual block model, i.e. selecting text by block (a rectangular area)</li> 
+        <li><span class="emphasize SourceCodePro">gv</span>: start visual mode on the same selected area as the last visual mode</li> 
+      </ul>
+    </li>
+    <li>Search mode: earch for text/pattern. Accessed via <span class="emphasize SourceCodePro">/, ?</span>; 
+      exited via <span class="emphasize SourceCodePro">/ Esc</span></li>
+    <li>Command mode: perform a wide variety of commands. Accessed via <span class="emphasize SourceCodePro">:</span></li>
+  </ul>
+</mat-expansion-panel>
+
+<br>
+
+<!-- word vs. WORD -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      word vs. WORD
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>By default, a <span class="emphasize">word</span> is a string consists only of:</div>  
+  <ul>
+    <li>English letter</li>
+    <li>number</li>
+    <li>underscore</li>
+  </ul>
+
+  Las Malvinas United Kingdom!
+
+  <div>In contrast, a <span class="emphasize">WORD</span> is a string consists of anything but whitespace.</div>
+  <br>
+  <div>For example:</div>
+  <ul>
+    <li>'long-term' = 3 words (long, hyphen, term), but only 1 WORD;</li>
+    <li>'Tom_Smith' = 1 word and 1 WORD.</li>
+  </ul>  
+  <div>Vim key bindings involving word vs. WORD:</div>
+  <ul>
+    <li><span class="emphasize SourceCodePro">w</span> - move forward by 1 word</li>
+    <li><span class="emphasize SourceCodePro">W</span> - move forward by 1 WORD</li>
+    <li><span class="emphasize SourceCodePro">e</span> - move to end of word</li>
+    <li><span class="emphasize SourceCodePro">E</span> - move to end of WORD</li>
+    <li><span class="emphasize SourceCodePro">b</span> - move backword by 1 word</li>
+    <li><span class="emphasize SourceCodePro">B</span> - move backward by 1 WORD</li>
+  </ul>
+</mat-expansion-panel>
+
+<br>
+
+<!-- Key bindings -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Vim key bindings
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>Index</th>
+      <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="keys">
+      <th mat-header-cell *matHeaderCellDef>Keys</th>
+      <td mat-cell *matCellDef="let element" class="line-break emphasize SourceCodePro"> {{element.keys}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element" class="line-break"> {{element.actions}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="examples">
+      <th mat-header-cell *matHeaderCellDef>Examples</th>
+      <td mat-cell *matCellDef="let element" class="line-break"> {{element.examples}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mode">
+      <th mat-header-cell *matHeaderCellDef>Mode</th>
+      <td mat-cell *matCellDef="let element" class="line-break"> {{element.mode}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-expansion-panel> 
+
+<br>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Search, replace; copy to another file
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>Examples:</div>
+  <ul>
+    <li>/[pattern]: search for text</li>
+    <li>?[pattern]: search for text backward</li>
+    <li>n: search again in whatever direction of your last search</li>
+    <li>N: search again in the opposit direction of your last search</li>
+    <li>:%s/[pattern]/[replacement]/gc: replace all occurrences of a pattern with confirmation
+      <ul>
+        <li>%: search range, equivalent to 1,$ (whole buffer).<br>
+          Can be replaced by 100,120 (search only between lines 100&ndash;120)<br>
+          When omitted, search is performed on current line only.
+        </li>
+        <li>g: global. search and replace all occurences, not the first occurence</li>
+        <li>c: confirm before replacing</li>
+      </ul>
+    </li>
+    <li>select text then "*y to copy</li>
+    <li>navigate to another file and "*p to paste</li>
+  </ul>
+</mat-expansion-panel>
+
+<br>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Marks
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  
+  <div>A mark allows you to record your current position so you can return to it later.</div>
+  <ul>
+    <li>a&ndash;z: file-specific marks. Each file can have its own set of a&mdash;z marks.</li>
+    <li>A&ndash;Z: global marks. Each mark is unique across all files and is used to identify a position within a particular file.</li>
+  </ul>
+
+  <div>Examples</div>
+  <ul>
+    <li>ma - set local mark a in file</li>
+    <li>mA - set global mark A</li>
+    <li>'a - jump to first non-whitespace character of line of mark a</li>
+    <li>`a - jump to mark a</li>
+    <li>d'a - delete from current line to line of mark a</li>
+    <li>d`a - delete from cursor to mark a</li>
+    <li>c`a - change from cursor to mark a</li>
+    <li>y`a - yank from cursor to mark a</li>
+    <li>:marks - list all marks</li>
+    <li>:marks aB - list marks a, B</li>
+    <li>:delmarks a - delete mark a</li>
+    <li>:delmarks aB - delete marks a, B</li>
+    <li>:delmarks a-e - delete marks a, b, c, d, e</li>
+    <li>:delmarks! - delete all lower case marks for the current buffer (lowercase marks in other files will not be affected)j</li>
+  </ul>
+</mat-expansion-panel>
+
+<br>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Command mode
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>Examples:</div>
+  <ul>
+    <li>:q! - close file without saving</li>
+    <li>:w - save file</li>
+    <li>:wq - save and close file</li>
+    <li>:e! - discard all unsaved changes (discard buffer and reopen file on disk)</li>
+  </ul>
+</mat-expansion-panel>
+
+<br>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Visual mode
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>Key bindings</div>
+  <ul>
+    <li>u - to lowercase</li>
+    <li>U - to uppercase</li>
+    <li>d - delete</li>
+    <li>c - change</li>
+    <li>y - yank</li>
+    <li>&gt; - indent</li>
+    <li>&lt; - unindent</li>
+  </ul>
+
+  <div>Inserting/appending multiple texts</div>
+  <ol>
+    <li>Ctrl v - enter visual block mode</li>    
+    <li>3j - go down 3 lines</li>
+    <li>I; then type ' - prefix ' on multiple lines</li>
+    <li>Ctrl o - to execute normal mode command</li>
+    <li>Ctrl v - reenter visual block model</li>
+    <li>$ - move cursor to end of lines</li>
+    <li>A; then type ' &amp; , - append ' &amp; ,</li>
+  </ol>
+
+  <div>Incrementing numbers</div>
+  <ol>
+    <li>copy ... 1 ... 5 times</li>
+    <li>put cursor on 2nd line on number '1'</li>
+    <li>Ctrl v, 4j</li>
+    <li>g, Ctrl a</li>
+  </ol>
+</mat-expansion-panel>

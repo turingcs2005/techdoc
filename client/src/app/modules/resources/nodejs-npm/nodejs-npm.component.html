@@ -1,0 +1,147 @@
+<div class="mat-h1">Node.js back end</div>
+<ul>
+    <li>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    nvm
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+                <li class="code">nvm use xx (e.g. default, 16, etc.)</li>
+                <li class="code">nvm deactivate</li>
+                <li class="code">nvm list</li>
+                <li class="code">nvm install xx</li>
+                <li class="code">nvm alias default xxxxxx</li>
+                <li class="code">nvm install xx --reinstall-packages-from=xx</li>
+                <li class="code">nvm uninstall xx</li>
+                <li class="code">npm i -g xxxx</li>
+                <li class="code">node --version</li>
+                <li class="code">which node</li>
+            </ul>
+        </mat-expansion-panel>
+    </li>
+
+    <li>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Initial setup of a Node.js/Express.js back end
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+                <li>If possible, use express generator to scaffold your project. 
+                    <br><code class="highlight">express --git PROJECT_NAME</code>
+                </li>
+                <li>To quickly scaffold folder structure, use 
+					<br><code class="highlight">sequelize init</code>
+                </li>
+                <li>When installing packages for development only, use 
+                    <br><code class="highlight">npm i -D XXXX</code>
+                </li>
+                <li>If you implement cors:<br>
+                    <code class="highlight">npm i cors</code> <br>
+                    <code class="highlight">const cors = require(cors())</code></li>
+            </ul>
+        </mat-expansion-panel>
+
+    </li>
+
+    <li>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Common packages for CRUD backend:
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+                <li><a href="https://expressjs.com/" target=_blank class="link">express</a></li>
+                <li><a href="https://sequelize.org/" target=_blank class="link">sequelize</a></li>
+                <li><a href="https://www.npmjs.com/package/cors" target=_blank class="link">cors</a></li>
+                <li><a href="https://www.npmjs.com/package/dotenv" target=_blank class="link">dotenv</a></li>
+                <li><a href="https://www.npmjs.com/package/joi" target=_blank class="link">joi</a></li>
+                <li>if using a postgreSQL database:
+                    <ul>
+                        <li><a href="https://www.npmjs.com/package/pg" target=_blank class="link">pg</a></li>
+                        <li><a href="https://www.npmjs.com/package/pg-hstore" target=_blank class="link">pg-hstore</a></li>
+                    </ul>
+                </li>
+                <li>if using a microsoft sql database:
+                    <ul>
+                        <li><a href="https://www.npmjs.com/package/tedious" target=_blank class="link">tedious</a></li>
+                    </ul>
+                </li>
+                <li>Oracle database is a special case since it is not compatible with sequelize.
+                    <ul>
+                        <li><a href="https://www.npmjs.com/package/oracledb" target=_blank class="link">oracledb</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </mat-expansion-panel>
+    </li>
+
+    <li>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Recommended folder structure
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+                <li><mat-icon>folder_open</mat-icon>config
+                    <ul>
+                        <li>db.config.js</li>
+                    </ul>
+                </li>
+                <li><mat-icon>folder_open</mat-icon>controllers
+                    <ul>
+                        <li>(define controllers here)</li>
+                    </ul>
+                </li>
+                <li><mat-icon>folder_open</mat-icon>models
+                    <ul>
+                        <li>index.js</li>
+                        <li>(define database table models here using sequelize)</li>
+                    </ul>
+                </li>
+                <li><mat-icon>folder_open</mat-icon>routes
+                    <ul>
+                        <li>(define routes of the controller functions here using express)</li>
+                    </ul>
+                </li>
+                <li><mat-icon>folder_open</mat-icon>validation
+                    <ul>
+                        <li>(write validations for requests using joi here)</li>
+                    </ul>
+                </li>
+                <li>.env</li>
+                <li>.gitignore</li>
+                <li>package.json</li>
+                <li>server.js</li>
+            </ul>
+            <p>
+                This structure is a recommendation for the core functionality of a CRUD backend.  Your project may include all, a subset or a superset of the above.
+                For example, if your backend is only retrieving data from an existing database, you may not need a models folder since you are not creating any new table models.
+            </p>
+        </mat-expansion-panel>
+    </li>
+
+    <li>
+        Online resources for node, express and sequelize
+        <ul>
+            <li><a href="https://bezkoder.com/node-express-sequelize-postgresql/" target=_blank class="link">sequelize</a></li>
+            <li><a href="https://sequelize.org/master/manual/assocs.html" target=_blank class="link">table association</a></li>
+        </ul>
+    </li>
+    <li>When building REST APIs, follow conventions below:
+        <ul>
+            <li>GET method for acquiring data. Use
+                <ul>url parameter (e.g. xxx/:policy_id/:building_id), accessed by <span class="code">req.params</span></ul>
+                <ul>query parameter (e.g. xxx/?policy_id=xxxx&building_id=xxxx), accessed by <span class="code">req.query</span></ul>
+            </li>
+            <li>POST method for saving data.</li>
+        </ul>
+        <span class="underline">Most front end APIs do not allow request body in GET.</span> 
+        Postman uses curl that allows it. Angular's http module uses Xhr that doesn't allow it.
+    </li>
+</ul>

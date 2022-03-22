@@ -1,0 +1,61 @@
+<p class="mat-h2">PM2 Deployment</p>
+
+<p>PM2 is a JavaScript package allowing deployment of Node.js apps without building a docker image.</p>
+<ul>
+	<li>
+		It is a lightweight solution, as the deployment takes only ~ 1MB of source code compared to a 
+		docker image of over 150MB (if you use Alpine Linux + Node.js image); or a docker image of over 
+		1GB (if you use standard Linux + Node.js image).
+	</li>
+	<li>
+		Unlike docker deployment where the only dependency is the Linux operating system kernel, PM2 
+		deployment requires the correct version of Node.js to be installed in order for your apps to run.
+	</li>
+	<li>
+		PM2 is not the same as <span class="code">node ./bin/www</span>. It serves as a network traffic 
+		loadbalancer across multiple node.js apps; it watches for file changes and redeploys the apps 
+		when such changes occur.
+	</li>
+</ul>
+
+<p>We use PM2 deployment when Azure app service is down, so this is a temporary solution. To deploy an app
+	 using PM2:
+</p>
+		 
+<ol>
+	<li>Create your back end app and front end app.</li>
+	<li>Choose a port for your app. We start with port 5001. In your ./bin/www file:<br>
+		<span class="code">var port = normalizePort(process.env.PORT || 'xxxx');</span><br>
+		Use a higher port number if a port is already taken.
+	</li>
+	<li>Open up your server firewall to allow traffic through that port<br>
+		<span class="code">sudo ufw allow xxxx</span>
+	</li>
+	<li>Compile your front end app to a directory that is served by your back end, e.g. /app/dist/</li>
+	<li>Serve your front end. In your app.js file, add code below before error handler, 
+		but after all other API routes:<br>
+		<pre class="code">
+app.use(express.static(path.join(__dirname, '/app/dist')));
+app.all('/*', (req, res, next) => &#123;
+    res.sendFile('index.html', &#123;root: path.join(__dirname, '/app/dist')&#125;);
+&#125;);</pre>
+	</li>
+	<li>Create a bash file xxxx.sh and make it executable<br>
+		<span class="code">sudo chmod +x xxxx.sh</span><br>
+		Linux does not care about file extension. Using '.sh' extension is a good practice&mdash;it tells 
+		people that your file has bash commands.
+	</li>
+	<li>Populate your executable with code similar to those below<br>
+		<pre class="code">
+#!/bin/bash
+# pm2 delete all    -- only if you want to stop all services
+cd /home/rxw509/apps/deployment/
+
+# developer tech doc
+pm2 start ./techdoc/server/bin/www --name "technical documentation" --watch</pre>
+You can serve as many apps as you want by adding more lines.</li>
+	<li>Optionally, edit crontab to schedule a task, so your apps will be served upon server reboot
+		 (<span class="code">crontab -e</span>)<br>
+		<span class="code">@reboot rxw509 /home/HANOVER/rxw509/apps/deployment/pm2.sh</span>
+	</li>
+</ol>

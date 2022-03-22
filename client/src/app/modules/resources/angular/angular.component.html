@@ -1,0 +1,121 @@
+<div class="mat-h1">Angular</div>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Project setup
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>As a general rule, we stick to standard Angular features as much as possible. We avoid building unnecessary custom features to minimize code base and to 
+        simplify project maintenance.</p>
+    <p>Below is a list of recommendations for setting up your Angular app. 
+        <span class="underline">To skip standard project setup, you may clone our Angular template on Azure Git repo.</span>
+    </p>
+    <ul>
+        <li>When creating a new app (<span class="code">ng new xxxx</span>), choose .scss for stylesheet. Use Indigo-Pink color scheme as default 
+        if you do not plan to customize.</li>
+        <li>Always use the Material library (<span class="code">ng add @angular/material</span>). It is built in Angular; it serves Angular.</li>
+        <li>At top level (app module), create 3 components under <span class="code">/src/app/components/</span>
+            <ul>
+                <li>home component (<span class="code">ng g c components/home</span>)</li>
+                <li>top-bar component (<span class="code">ng g c components/top-bar</span>)</li>
+                <li>help component (<span class="code">ng g c components/help</span>)</li>
+            </ul>
+            Every other feature (that is not immediately needed) should be placed in a lazy-loaded feature module. Preemptive loading causes delay 
+            to user interactivity.
+        </li>
+        <li>Shared module is used to house all shared tools such as Material components, HTTP module, Forms module, etc. 
+            (<span class="code">ng g m modules/shared --module=app</span>) It is imported into feature modules as need arises.
+        </li>
+        <li>Feature modules are created to facilitate business functionalities (<span class="code">ng g m modules/xxxx --route=xxxx --module=app</span>).
+            Apps we build generally do not involve deeply-nested hierarchies. <span class="highlight">app module &rarr; feature module</span> is usually sufficient.
+        </li>
+        <li>For each module, we may create an app-data directory to store the following three types of data:
+            <ul>
+                <li><span class="code">data.ts</span> &mdash; static data such as dropdown menu items, etc.</li>
+                <li><span class="code">models.ts</span> &mdash; classes &amp; interfaces</li>
+                <li><span class="code">tools.ts</span> &mdash; standalone functions, etc.</li>
+            </ul>
+        </li>
+        <li>For navigation, we strongly prefer nested menus triggered by a single menu button. Such design saves real estate and makes the app much more 
+            user-friendly on a mobile device.
+        </li>
+    </ul>
+
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Development &amp; debugging
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+       <li><div class="highlight mat-h3">Use Azure MS SQL database</div>
+           PostgreSQL is installed on Azure Ubuntu VM but I encourage you to use MS SQL dev database in Azure cloud, as PostgreSQL offers 
+           more advanced features that won't work in MS SQL in production. Using MS SQL for both development and production will guarantee 
+           code compatibility. Please note that there are 3 MS SQL databases in Azure: test, uat and prod.
+        </li>
+				<br>
+        <li><div class="highlight mat-h3">Enable CORS on back end during development</div>
+           During development, your front end Angular app will be served using <span class="code">ng serve</span> live in memory without 
+           compiling (transpiling) code onto the hard drive. As a result, your Node.js back end will not be serving your Angular front 
+           end. Please enable CORS in Node.js back end so your Angular front end can access the back end's API services (e.g. saving 
+           to database).
+        </li>
+				<br>
+        <li><div class="highlight mat-h3">Forward ports</div>
+            Forward two ports to your laptop from Azure Linux VM
+            <ul>
+                <li>The port that serves your Angular app (<span class="code">ng serve --port=xxxx</span>).</li>
+                <li>The port that serves your APIs on back end (in your back end ./bin/www file 
+                    <span class="code">var port = normalizePort(process.env.PORT || '3456');</span>)</li>
+            </ul>  
+
+        </li>
+    </ul>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Angular resources for building apps
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+        <li><a href="https://fonts.google.com/icons" target=_blank>Google Fonts </a>(for material icons)</li>
+        <li><a href="http://mcg.mbitson.com/#!?mcgpalette0=%233f51b5" target=_blank>Color palette</a>(for custom color schemes)</li>
+        <li><a href="https://update.angular.io/" target=_blank>Anguar upgrade</a>(when you want to leverage new Angular releases)</li>
+        <li>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Safe pipe
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Safe pipe allows Angular app to render resources from another domain. The most common use is to render 
+                Power BI dashboard in an Angular app. Check out <a href="https://www.npmjs.com/package/safe-pipe" 
+                target=_blank class="link">documentation</a>.
+                </p>
+                <p>To implement safe pipe:</p>
+                <ol>
+                    <li>Install the package to your Angular project<span class="code">npm i safe-pipe</span></li>
+                    <li>Import safe pipe to your module <br>
+                        <span class="code">import &#123; SafePipeModule &#125; from 'safe-pipe';</span><br>
+                        <span class="code">imports: &#91;SafePipeModule&#93;</span></li>
+                    <li>Consume safe pipe in your template<br>
+                        <span class="code">
+                            &lt;iframe &#91;src&#93;="url | safe: 'resourceUrl"&gt;&lt;/iframe&gt;
+                        </span><br>
+                        where <span class="highlight">url</span> is your Power BI Dashboard URL. As a property in your component, 
+                        <span class="highlight">url</span> can be manipulated programmatically. For example: <br>
+                        <span class="code">this.url = this.url1 + this.agreementID + this.url2;</span>
+                    </li>
+                </ol>
+            </mat-expansion-panel>
+        </li>
+    </ul>
+</mat-expansion-panel>
+

@@ -1,0 +1,170 @@
+<div class="mat-h1">Azure Deployment</div>
+
+<p>A CI/CD pipeline (e.g. Azure CI/CD pipeline, Jenkins) allows deployment from source code and is the preferred approach. The manual approach 
+    described below explicitly builds a docker image.</p>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Overview of Deployment
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>A typical web app has 3 parts:</div>
+    <ul>
+        <li>Front end - Angular app. Source code are compiled into a folder (e.g. /dist/client). These compiled 
+            code run in a client browser such as Google Chrome.
+        </li>
+        <li>Back end - Node.js app. Source code run on a server. It serves both APIs (e.g. data base CRUD operations) 
+            and the compiled front end (see above).
+        </li>
+        <li>Database - For data persistency. Usually a SQL database (Microsoft SQL) or non-SQL database (MongoDB)</li>
+    </ul>
+
+    <p>A front end never talks to a database directly: a back end connects them.
+        <br><span class="code">Front end &larr; &rarr; Back end &larr; &rarr; Database</span></p>
+
+    <div>To deploy a web app, you need to build a docker image, so your Node.js app runs in an isolated environment 
+        with all its dependencies. An activated docker image is called a docker container. All docker containers run 
+        off a shared Linux kernel.
+    </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            1. Files and folders
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ol>
+        <li>Decide on app URL and request an Azure app service to be set up in Azure (Margo/Ryan).</li>
+        <li><span class="code">git clone</span> your front end and back end to a single deployment directory, and rename them 'client' and 'server'.</li>
+        <li>Create empty Dockerfile and .dockerignore file. Now your file/folder structure should look like this: 
+            <ul>
+                <li class="with-icon"><mat-icon>folder</mat-icon> &nbsp; client</li>
+                <li class="with-icon"><mat-icon>folder</mat-icon> &nbsp; server</li>
+                <li class="with-icon"><mat-icon>description</mat-icon> &nbsp; Dockerfile</li>
+                <li class="with-icon"><mat-icon>description</mat-icon> &nbsp; .dockerignore</li>
+            </ul>
+        </li>
+        <li>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Populate Dockerfile
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <pre class="code">
+    # build front end
+    FROM node:16-alpine AS client_build
+    WORKDIR /app
+    COPY ./client /app/
+    RUN npm install
+    RUN node_modules/.bin/ng build
+    # build back end
+    FROM node:16-alpine AS server_build
+    WORKDIR /app
+    COPY ./server /app/
+    COPY --from=client_build /app/dist/client /app/dist
+    RUN npm install --production
+    # build docker
+    FROM alpine
+    WORKDIR /app
+    RUN apk add --no-cache nodejs
+    COPY --from=server_build /app ./
+    CMD ["node", "./bin/www"]
+                </pre>
+            </mat-expansion-panel>
+            
+        </li>
+        <li>            
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Populate .dockerignore file
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <pre class="code">
+    **/node_modules
+    **/.git
+    **/.gitignore
+    **/.vscode
+    **/README.md
+                </pre>
+            </mat-expansion-panel>
+        </li>
+        <li>Remember to create your own .env file since .env is ignored by git to protect password.</li>
+        <li>run <span class="code">npm i</span> on back end and front end</li>
+    </ol>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            2. Configuration
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+        On the front end, you need to make sure your src/angular.json configuration matches your deployment, 
+        i.e. the correct environment and the correct build output path are used. Any mismatch will produce an error.
+    </p>
+    <ul>
+        <li>
+            Update base URL so the front end API calls will reach out to your deployment URL instead of test URL. For 
+            example, if your app will be deployed @ https://facreinsurance-uat.allmerica.com/, in your front end 
+            project, file src/environments/environment.xxxx.ts, change baseURL to https://facreinsurance-uat.allmerica.com/ 
+            so your front end will be calling the correct APIs upon deployment. A sample environment.uat.ts file: <br>
+            <pre class="code">
+export const environment = &#123;
+    production: false,
+    baseURL: 'https://facreinsurance-uat.allmerica.com/'
+&#125;
+            </pre>
+        </li>
+        <li>
+            Compile to the right directory (configured in file src/angular.json). By default it is /dist/client            
+            <span class="code">"outputPath": "./dist/client"</span>. 
+            You can choose which environment to use when you serve or compile an Angular app. Environments are also configured 
+            in <span class="code">src/angular.json</span>. You can define as many environments as you wish. There are separate 
+            environments for ng serve (for in-memory test) and ng build (for deployment). You may use 
+            <span class="code">ng build/serve --configuration=XXXX</span> (uat, development, production, etc.) so the correct URLs are used.
+        </li>
+        <li>
+            On the back end, you need to make sure that Node.js is serving the compiled front end from the correct directory, i.e. 
+            the same directory to which you copied the compiled Angular app in your Dockerfile:
+            <pre class="code">
+// app.js file: serving Angular app from directory /app/dist
+app.use(express.static('./app/dist'));
+app.all('/*', (req, res, next) => &#123;
+    res.sendFile('index.html', &#123;root: './app/dist'&#125;);
+&#125;);
+            </pre>
+
+            <p>Code above in your app.js file need to match code below in your Dockerfile to ensure the correct directory is used:</p>
+            <pre class="code">
+// Dockerfile: copying from /app/dist/client on front end to /app/dist on back end
+COPY --from=client_build /app/dist/client /app/dist  
+            </pre>
+        </li>
+    </ul>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            3. Build docker image and push to Azure docker registry
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    Under your deployment root directory, execute: 
+    <ol>
+        <li class="code">az login</li>
+        <li class="code">sudo az acr login --name AZURE_DOCKER_REGISTRY (e.g. pwbcontainerreg)</li>
+        <li class="code">sudo docker build -t pwbcontainerreg.azurecr.io/XXXXX . && sudo docker push pwbcontainerreg.azurecr.io/XXXXX</li>
+        <li>Log into Azure portal, select the correct app service (e.g. fac-uat), and click on 'Deployment Center' on left</li>
+        <li>Select image XXXXX (the image you built in step 3) and click on 'Save' on upper left</li>
+        <li>Once saving is finished, you can access your app with your LAN ID and password 'rsa123' in dev/uat; your LAN ID and 
+            your enterprise password in prod (which you probably will never do unless you are a user yourself).
+        </li>
+        <li>To redeploy, rebuild docker image and save again. You may need to toggle 'continuous deployment'</li>
+    </ol>
+</mat-expansion-panel>
+

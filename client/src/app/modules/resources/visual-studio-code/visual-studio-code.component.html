@@ -1,0 +1,160 @@
+<div class="mat-h1">Visual Studio Code</div>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Fira Code
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        Fira Code with ligatures enabled will make your source code more readable by properly displaying multi-character symbols.
+        <ol>
+            <li>Download Fira Code from Google Font</li>
+            <li>Extract FiraCode-Regular</li>
+            <li>Control Panel &rarr; Font &rarr; drop Fira-Code-Regular</li>
+            <li>Launch Visual Studio Code &rarr; Ctrl + Shift + P &rarr; Settings (JSON)</li>
+            <li>Add the following 
+                <pre class="code">
+    "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+                </pre>
+            </li>
+        </ol>
+    </mat-expansion-panel>
+
+    <!-- 🔥 Key extensions  -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Key extensions
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ul>
+            <li><span class="hint" matTooltip="editing source code on Linux server without screen lag">Remote - SSH</span>
+                <ul>
+                    <li>Connecting via password
+                        <ol>
+                            <li>Once installation completes, press F1 or Ctrl + Shift + P to activate quick command</li>
+                            <li>Choose <span class="highlight">Remote SSH: Connect to Host</span></li>
+                            <li>When prompted, enter user_name@server_name (for now, YOUR_LAN_ID@lxdvds01.hanover.com)</li>
+                            <li>When prompted, enter your enterprise password.</li>
+                            <li>Navigate to your code directory on Linux server.</li>
+                        </ol>
+                    </li>
+                    <li>Connecting via ssh key - no password required
+                        <ol>
+                            <li>On your laptop, use PowerShell to navigate to C:\Users\YOUR_LAN_ID\.ssh</li>
+                            <li>Generate your private key and public key if you haven't done so<br>
+                                <code class="highlight">ssh-keygen -t rsa -b 2048</code>
+                            </li>
+                            <li>Copy your public key file to Linux server use either of the two methods below:
+                                <ul>
+                                    <li>WinSCP GUI interface</li>
+                                    <li>PowerShell command <br>
+                                        <code class="highlight">scp id_rsa.pub YOUR_LAN_ID@lxdvds01.hanover.com:~</code>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Rename your public key file to 'authorized_keys' and change permission to 644</li>
+                            <li>Move file 'authorized_keys' to directory ~/.ssh/</li>
+                            <li>On laptop VSC, create SSH config file<br>
+                                <div class="highlight">
+                                Host LinuxVM (or whatever server name you prefer) <br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; HostName lxdvds01.hanover.com <br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; User YOUR_LAN_ID <br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; IdentityFile C:\Users\rxw509\.ssh\id_rsa
+                                </div>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+               
+            </li>
+            <li>Angular extensions (Optional. No need for these if you work solely on the back end) 
+                <ul>
+                    <li>Angular Language Service</li>
+                    <li>Angular Snippets</li>
+                    <li>Angular Schematics</li>
+                </ul>
+            </li>
+        </ul>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title class="faded">
+                Vim extension
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Vim is completely optional&mdash;it requires months of practice to develop muscle memory. Experienced Vim users can edit source code 
+            with improved efficiency and precision; others hate it.
+        </p>
+        <ul>
+            <li>
+                Disable Vim's <span class="highlight">Ctrl + w </span>keyboard shortcut to avoid conflict with VSC's keyboard shortcut: <br>
+                <pre class="code">
+"vim.handleKeys": &#123;
+    "&lt;C-w&gt;": false
+&#125;
+                </pre>
+            </li>
+            <li>Please refer to <span class="link" [routerLink]="['/resources/vim']">Vim key binding reference</span> for more information.</li>
+        </ul>    
+    </mat-expansion-panel>
+
+    <!-- 🔥 Optional extensions -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Optional extensions</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+            <li>drawio - If you draw visio charts for project documentation. Highly recommended.</li>
+            <li>Docker - If you deploy apps in docker. We are piloting Azure CI/CD pipeline, so deploying from source code will be the future. However, it is 
+                still recommended that you install this extension and learn the basics of docker deployment.</li>
+            <li><span class="faded">Emoji Sippets</span> - If you plan to use Emoji in your source code comments. <br>
+            After you enter an Emoji, press <span class="highlight">Tab key</span> so you can enter more Emoji's</li>
+            <li><span class="faded">Python tools</span> - If you are a data scientist and plan to use Python for data manipulation (this scenario is extremely rare in our development work):
+                <ul>
+                    <li>Python - If you program in Python in VSC.</li>
+                    <li>Jupyter - if you use Python notebook for data manipulation.</li>
+                </ul>
+            </li>
+            <li><span class="faded">Azure App Service</span> - GUI for Azure. With Azure CLI, everything can be accomplished by typing code on terminal. Unless you are not a developer and prefer GUI, 
+                skip this extension.</li>
+            <li><span class="faded">Database extensions for MongoDB PostgreSQL and MS SQL</span> - all these databases come with their own GUI such as MongoDB Compass, pgAdmin4 and 
+							MS SQL Server Management Studio, which provide much more sophisticated functionalities. Use VSC extensions for quick access/data review.
+							<ul>
+								<li>PostgreSQL - PostgreSQL Explorer</li>
+								<li>MS SQL - SQL Server</li>
+								<li>MongoDB - MongoDB for VS Code</li>
+							</ul>
+						</li>
+        </ul>
+    </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Keyboard shortcuts
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ul>
+            <li><span class="highlight">Ctrl + ~</span>: toggle terminal</li>
+            <li><span class="highlight">Ctrl + ,</span>: quick access to VSC settings</li>
+            <li><span class="highlight">Ctrl + Shift + p / F1</span>: quick access to command launch</li>
+            <li><span class="highlight">Ctrl + Shift + o</span>: show source code hierarchy for quick navigation</li>
+            <li><span class="highlight">Ctrl + p</span>: quick search across source code files</li>
+            <li><span class="highlight">Alt + tab number</span>: activate said tab, e.g. tab 1, 2, 3</li>
+            <li><span class="highlight">Ctrl + w</span>: close active tab (need to 
+                <span [routerLink]="['/technical-documentation/vim']" class="link">disable Ctrl + w</span> in Vim if you have Vim 
+								extension installed&mdash;see above under 'Vim extension')</li>
+						<li><span class="faded">Ctrl + shift + a:</span> insert inline comment (works under Linux, but not Windows)</li>
+        </ul>
+
+    </mat-expansion-panel>
+
+
+
+

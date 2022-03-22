@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="mat-elevation-z12">
+
+  <div>
+    <mat-icon [matMenuTriggerFor]="appMenu" class="mat-elevation-z2">menu</mat-icon>
+  </div>
+
+  <div>Technical Documentation</div>
+
+  <div>
+    <mat-icon [routerLink]="['/help']" class="mat-elevation-z2">help</mat-icon> &nbsp;
+  </div>
+
+</mat-toolbar>
+
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon ></button>
+  <button mat-menu-item [matMenuTriggerFor]="introductionMenu">Introduction</button>
+  <button mat-menu-item [matMenuTriggerFor]="resourcesMenu">Resources</button>
+</mat-menu>
+
+<mat-menu #introductionMenu="matMenu">
+  <button mat-menu-item [routerLink]="['/introduction/technologies']">Technologies</button>
+  <button mat-menu-item [routerLink]="['/introduction/software']">Software</button>
+  <button mat-menu-item [routerLink]="['/introduction/programming-languages']">Programming Languages</button>
+</mat-menu>
+
+<mat-menu #resourcesMenu="matMenu">
+  <button mat-menu-item [routerLink]="['/resources/bash']">Bash commands</button>
+  <button mat-menu-item [routerLink]="['/resources/visual-studio-code']">Visual Studio Code</button>
+  <button mat-menu-item [routerLink]="['/resources/vim']" class="faded">Vim</button>
+  <button mat-menu-item [routerLink]="['/resources/angular']">Angular</button>
+  <button mat-menu-item [routerLink]="['/resources/nodejs-npm']">Node.js + NPM</button>
+  <button mat-menu-item [routerLink]="['/resources/emoji']" class="faded">Emoji</button>
+  <button mat-menu-item [routerLink]="['/resources/azure']" class="faded">Azure deployment</button>
+  <button mat-menu-item [routerLink]="['/resources/pm2']">PM2 deployment</button>
+</mat-menu>
