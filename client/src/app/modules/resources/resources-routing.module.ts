@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularComponent } from './angular/angular.component';
 import { AzureComponent } from './azure/azure.component';
 import { BashComponent } from './bash/bash.component';
+import { DockerComponent } from './docker/docker.component';
 import { EmojiComponent } from './emoji/emoji.component';
 import { NodejsNpmComponent } from './nodejs-npm/nodejs-npm.component';
 import { Pm2Component } from './pm2/pm2.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'emoji', component: EmojiComponent },
   { path: 'pm2', component: Pm2Component },
   { path: 'bash', component: BashComponent },
+  { path: 'docker', component: DockerComponent },
 ];
 
 @NgModule({

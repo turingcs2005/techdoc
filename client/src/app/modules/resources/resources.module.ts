@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { Pm2Component } from './pm2/pm2.component';
 import { VimComponent } from './vim/vim.component';
 import { BashComponent } from './bash/bash.component';
+import { DockerComponent } from './docker/docker.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { BashComponent } from './bash/bash.component';
     EmojiComponent,
     Pm2Component,
     VimComponent,
-    BashComponent
+    BashComponent,
+    DockerComponent
   ],
   imports: [
     CommonModule,

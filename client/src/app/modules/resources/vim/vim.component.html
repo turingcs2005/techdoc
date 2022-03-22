@@ -1,4 +1,4 @@
-<div class="mat-h1">An introduction to Vim</div>
+<div class="mat-h1">Vim</div>
 
 <!-- Mode -->
 <mat-expansion-panel>
@@ -29,8 +29,6 @@
   </ul>
 </mat-expansion-panel>
 
-<br>
-
 <!-- word vs. WORD -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
@@ -44,8 +42,6 @@
     <li>number</li>
     <li>underscore</li>
   </ul>
-
-  Las Malvinas United Kingdom!
 
   <div>In contrast, a <span class="emphasize">WORD</span> is a string consists of anything but whitespace.</div>
   <br>
@@ -65,8 +61,6 @@
   </ul>
 </mat-expansion-panel>
 
-<br>
-
 <!-- Key bindings -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
@@ -75,38 +69,38 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
-    <ng-container matColumnDef="index">
-      <th mat-header-cell *matHeaderCellDef>Index</th>
-      <td mat-cell *matCellDef="let element"> {{element.index}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="keys">
-      <th mat-header-cell *matHeaderCellDef>Keys</th>
-      <td mat-cell *matCellDef="let element" class="line-break emphasize SourceCodePro"> {{element.keys}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element" class="line-break"> {{element.actions}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="examples">
-      <th mat-header-cell *matHeaderCellDef>Examples</th>
-      <td mat-cell *matCellDef="let element" class="line-break"> {{element.examples}} </td>
-    </ng-container>
+  <div class="overflow-auto">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef>Index</th>
+        <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="keys">
+        <th mat-header-cell *matHeaderCellDef>Keys</th>
+        <td mat-cell *matCellDef="let element" class="line-break emphasize SourceCodePro"> {{element.keys}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element" class="line-break"> {{element.actions}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="examples">
+        <th mat-header-cell *matHeaderCellDef>Examples</th>
+        <td mat-cell *matCellDef="let element" class="line-break"> {{element.examples}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="mode">
-      <th mat-header-cell *matHeaderCellDef>Mode</th>
-      <td mat-cell *matCellDef="let element" class="line-break"> {{element.mode}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="mode">
+        <th mat-header-cell *matHeaderCellDef>Mode</th>
+        <td mat-cell *matCellDef="let element" class="line-break"> {{element.mode}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 </mat-expansion-panel> 
-
-<br>
 
 <mat-expansion-panel>
   <mat-expansion-panel-header>
@@ -134,8 +128,6 @@
     <li>navigate to another file and "*p to paste</li>
   </ul>
 </mat-expansion-panel>
-
-<br>
 
 <mat-expansion-panel>
   <mat-expansion-panel-header>
@@ -169,8 +161,6 @@
   </ul>
 </mat-expansion-panel>
 
-<br>
-
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -185,8 +175,6 @@
     <li>:e! - discard all unsaved changes (discard buffer and reopen file on disk)</li>
   </ul>
 </mat-expansion-panel>
-
-<br>
 
 <mat-expansion-panel>
   <mat-expansion-panel-header>

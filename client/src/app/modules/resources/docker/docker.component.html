@@ -1,0 +1,155 @@
+<div class="mat-h1">Docker</div>
+
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			Check OS kernel version &amp; Linux distro version
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<div>You need a Linux kernel to run any docker image.</div>
+	<pre class="code">
+uname -a
+cat /etc/os-release
+	</pre>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			Docker vs. PM2
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<div class="overflow-auto">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+			
+      <ng-container matColumnDef="metric">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> {{element.metric}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="desc1">
+        <th mat-header-cell *matHeaderCellDef>docker</th>
+        <td mat-cell *matCellDef="let element"> {{element.desc1}} </td>
+      </ng-container>
+			
+      <ng-container matColumnDef="desc2">
+        <th mat-header-cell *matHeaderCellDef>pm2</th>
+        <td mat-cell *matCellDef="let element"> {{element.desc2}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+	</div>
+	<table></table>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			Artifacts
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<ul>
+		<li><span class="emphasize">image</span>: frozen, immutable blueprint for creating docker containers</li>
+		<li><span class="emphasize">container</span>: an image in running state (live)
+			<ul>
+				<li>remains in your system after execution finishes</li>
+				<li>mutable (a container layer lives on top of an image layer)</li>
+				<li>multiple containers off the same image will each have its own container layer</li>
+			</ul>
+		</li>
+		<li><span class="emphasize">registry</span>: a repository for docker images. Docker Hub by default</li>
+	</ul>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			Basic commands
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+
+	<div>Docker commands are interpreted by Docker CLI, a command line tool that allows you to talk to 
+		docker daemon via REST APIs.</div>
+
+	<div>Syntax<br>
+		<pre class="code">
+docker OBJECT COMMAND [OPTIONS] [TARGET]
+		</pre>
+	</div>
+
+	<ol>
+		<li>Create a container
+			<pre class="code">
+docker container create --name CONTAINER_NAME IMAGE_NAME
+			</pre>
+		</li>
+		
+		<li>Stop a running a container
+			<pre class="code">
+docker container stop CONTAINER_NAME
+			</pre>
+		</li>
+
+		<li>Run a container
+			<pre class="code">
+docker container start CONTAINER_NAME
+			</pre>
+		</li>
+
+		<li>Pull a docker image from docker registry (e.g. Docker Hub)
+			<pre class="code">
+docker image pull IMAGE_NAME
+			</pre>
+		</li>
+
+		<li>Create and run a docker container in detached mode (no terminal window)
+			<pre class="code">
+docker container run -d IMAGE_NAME</pre>
+			<ul>
+				<li>container run = container create + container start</li>
+				<li> -d / --detached: no terminal window for input/output</li>
+				<li>a default container name will be supplied</li>
+			</ul><br>
+		</li>
+
+		<li>Create and run a docker container in interactive mode (with terminal window)
+			<pre class="code">
+docker container run -it IMAGE_NAME</pre>
+			<ul>
+				<li> -i / --interactive: interactive mode</li>
+				<li> -t / --tty: teletypewriter, i.e. pretty output</li>
+			</ul><br>
+		</li>
+		<li>Display downloaded docker images
+			<pre class="code">
+docker image ls
+			</pre>
+		</li>
+
+		<li>Stop a running container (if it is running) and restart
+			<pre class="code">
+docker container restart CONTAINER_NAME</pre>
+			<div>container restart = container stop + container start</div><br>
+		</li>
+
+		<li>Remove a container/image
+			<pre class="code">
+docker container rm CONTAINER_NAME
+docker image rm IMAGE_NAME</pre>
+			<div>Before removing an image, all containers based off it must be removed first.</div><br>
+		</li>
+
+
+		<li>Remove dangling container/image
+			<pre class="code">
+docker container prune
+docker image prune</pre>
+			<div>Remove containers that have been stopped/killed; or images that have no associated container.</div>
+		</li>
+
+	</ol>
+
+	<p><span [routerLink]="['/resources/azure']" class="link">Azure deployment</span> section provides information on creating Dockerfile and .dockerignore.</p>
+</mat-expansion-panel>

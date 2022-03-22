@@ -3,6 +3,7 @@ export interface TreeNode {
   children?: TreeNode[];
 }
 
+// data structure feeding key binding table
 export class KeyBinding {
   constructor(
     public index: number, 
@@ -11,4 +12,13 @@ export class KeyBinding {
     public examples: string = '',
     public mode: string = '',
   ){}
+}
+
+// data structure feeding a comparison table
+export class Comparison {
+  constructor(
+    public metric: string,
+    public desc1: string,
+    public desc2: string
+  ) {}
 }
