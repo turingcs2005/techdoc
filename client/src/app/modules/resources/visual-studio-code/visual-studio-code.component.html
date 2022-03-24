@@ -30,20 +30,20 @@
         </mat-expansion-panel-header>
 
         <ul>
-            <li><span class="hint" matTooltip="editing source code on Linux server without screen lag">Remote - SSH</span>
+            <li><span class="hint" matTooltip="editing source code on Linux server">Remote - SSH</span>
                 <ul>
                     <li>Connecting via password
                         <ol>
-                            <li>Once installation completes, press F1 or Ctrl + Shift + P to activate quick command</li>
+                            <li>Once installation completes, press F1 or Ctrl + Shift + p to activate quick command</li>
                             <li>Choose <span class="highlight">Remote SSH: Connect to Host</span></li>
-                            <li>When prompted, enter user_name@server_name (for now, YOUR_LAN_ID@lxdvds01.hanover.com)</li>
-                            <li>When prompted, enter your enterprise password.</li>
+                            <li>When prompted, enter user_name@server_name</li>
+                            <li>When prompted, enter your password.</li>
                             <li>Navigate to your code directory on Linux server.</li>
                         </ol>
                     </li>
                     <li>Connecting via ssh key - no password required
                         <ol>
-                            <li>On your laptop, use PowerShell to navigate to C:\Users\YOUR_LAN_ID\.ssh</li>
+                            <li></li>
                             <li>Generate your private key and public key if you haven't done so<br>
                                 <code class="highlight">ssh-keygen -t rsa -b 2048</code>
                             </li>
@@ -51,7 +51,7 @@
                                 <ul>
                                     <li>WinSCP GUI interface</li>
                                     <li>PowerShell command <br>
-                                        <code class="highlight">scp id_rsa.pub YOUR_LAN_ID@lxdvds01.hanover.com:~</code>
+                                        <code class="highlight">scp id_rsa.pub user_name@server_name:~</code>
                                     </li>
                                 </ul>
                             </li>
@@ -60,9 +60,9 @@
                             <li>On laptop VSC, create SSH config file<br>
                                 <div class="highlight">
                                 Host LinuxVM (or whatever server name you prefer) <br>
-                                    &nbsp; &nbsp; &nbsp; &nbsp; HostName lxdvds01.hanover.com <br>
-                                    &nbsp; &nbsp; &nbsp; &nbsp; User YOUR_LAN_ID <br>
-                                    &nbsp; &nbsp; &nbsp; &nbsp; IdentityFile C:\Users\rxw509\.ssh\id_rsa
+                                    &nbsp; &nbsp; &nbsp; &nbsp; HostName server_name <br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; User user_name <br>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; IdentityFile C:\Users\user_name\.ssh\id_rsa
                                 </div>
                             </li>
                         </ol>
@@ -92,10 +92,15 @@
         </p>
         <ul>
             <li>
-                Disable Vim's <span class="highlight">Ctrl + w </span>keyboard shortcut to avoid conflict with VSC's keyboard shortcut: <br>
+                (Optional) Disable Vim's keyboard shotcuts to avoid conflict with VSC's shortcuts:
+                <ul>
+                    <li><span class="highlight">Ctrl + w</span>, to close tab. Fewer key strokes than Vim's :q!.</li>
+                    <li><span class="highlight">Ctrl + k</span>, Ctrl + k z toggles zen mode.</li>
+                </ul>
                 <pre class="code">
 "vim.handleKeys": &#123;
-    "&lt;C-w&gt;": false
+    "&lt;C-w&gt;": false,
+    "&lt;C-k&gt;": false
 &#125;
                 </pre>
             </li>

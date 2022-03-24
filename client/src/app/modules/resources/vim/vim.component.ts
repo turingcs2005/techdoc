@@ -13,22 +13,23 @@ export class VimComponent implements OnInit {
   dataSource: KeyBinding[] = [
     new KeyBinding(
       1, 
-      'k\n j\n h\n l\n zz\n zt\n zb', 
-      'up\n down\n left\n right\n shift current line to middle of screen\nshift current line to top of screen\nshift current line to bottom of screen', 
-      'k - move up 1 row\n5j - move down 5 rows\n4h - move 4 characters to the left\n l - move to the next character\n \n \n',
+      'k\n j\n h\n l\n zz\n zt\n zb \n Ctrl + b\n Ctrl + f\n Ctrl + u\n Ctrl + d', 
+      'up\n down\n left\n right\n shift current line to middle of screen\nshift current line to top of screen\nshift current line to bottom of screen\n' +
+      ' move back one full screen\n move forward one full screen\n move back 1/2 screen\n move forward 1/2 screen', 
+      'k - move up 1 row\n5j - move down 5 rows\n4h - move 4 characters to the left\n l - move to the next character\n \n \n \n \n \n \n',
       'normal',
     ),
 
     new KeyBinding(
       2, '0\n ^\n |\n +\n -\n $\n H\n M\n L\n gg\n G',
-      'move to first column\n move to first non-whitespace character of current line\n move to prefixed column number\n ' + 
-      'move to the first non-whitespace of the next line\n' + 
-      'move to the first non-whitespace of the previous line\n move to end of current line\n' + 
-      'move to non-white space of the first line on screen\n move to non-whitespace of the middle line on screen\n' + 
+      'move to 1st column\n move to 1st non-whitespace of current line\n move to prefixed column number\n ' + 
+      'move to the 1st non-whitespace of next line\n' + 
+      'move to the 1st non-whitespace of previous line\n move to end of current line\n' + 
+      'move to non-white space of the 1st line on screen\n move to non-whitespace of the middle line on screen\n' + 
       'move to non-whitespace of the last line on screen\n ' + 
-      'move to beginning of file\n move to end of file if no prefix; or move to first non-whitespace of line number if prefixed',
-      '\n \n 5| - move to column 5\n 2+ - move to first non-whitespace 2 lines below\n 3- - move to first non-whitespace 3 lines above\n \n \n \n \n \n' + 
-      '5G - move to first non-whitespace character of line 5',
+      'move to beginning of file\n move to end of file if no prefix or prefixed line',
+      '\n \n 5| - move to column 5\n 2+ - move to 1st non-whitespace 2 lines below\n 3- - move to 1st non-whitespace 3 lines above\n \n \n \n \n \n' + 
+      '5G - move to 1st non-whitespace character of line 5',
       'normal'
     ),
 
@@ -50,7 +51,7 @@ export class VimComponent implements OnInit {
     ),
     
     new KeyBinding(5, 'c\n C\n r\n R', 'delete word(s) at cursor and enter insert mode\n delete from cursor to end of line and enter insert mode\n ' + 
-    'replace current single character under normal mode\n enter replace mode at cursor (every character you type will replace the existing one)', 
+    'replace current single character under normal mode\n enter replace mode at cursor', 
     'c2w - replace the next two words\n \n \n',
     'normal \u2192 insert\n normal \u2192 insert\n normal\n normal \u2192 replace'
     ),
@@ -62,7 +63,7 @@ export class VimComponent implements OnInit {
     '3s - delete the next 3 characters and insert\n', 'normal\n normal\n normal\n normal\n normal \u2192 insert\n normal \u2192 insert'
     ),
 
-    new KeyBinding(7, 'J\n y\n p\n P\n u\n Ctrl r',
+    new KeyBinding(7, 'J\n y\n p\n P\n u\n Ctrl + r',
     'join current line with next line\n yank (copy)\n paste after cursor\n paste before cursor\n undo\n redo the last undo', 
     '\n yy - yank current line\n \n \n \n', 
     'normal'),
