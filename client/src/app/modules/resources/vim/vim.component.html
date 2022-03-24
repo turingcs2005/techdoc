@@ -127,6 +127,7 @@
     <li>select text then "*y to copy</li>
     <li>navigate to another file and "*p to paste</li>
   </ul>
+  <div>You do not need "*y, "*p to copy/paste between tabs in different viewports. You can use y, p straight.</div>
 </mat-expansion-panel>
 
 <mat-expansion-panel>
@@ -169,8 +170,30 @@
   </mat-expansion-panel-header>
   <div>Examples:</div>
   <ul>
-    <li>:q! - close file without saving</li>
+    <li>:q - close file</li>
     <li>:w - save file</li>
+    <li>:wq - save and close file</li>
+    <li>:q! - close file without saving</li>
+    <li>:qa! - close all files without saving</li>
+    <li>:wqa - close all files after saving</li>
+    <li>:e! - discard all unsaved changes (discard buffer and reopen file on disk)</li>
+  </ul>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Viewport
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ul>
+    <li>:vsp: split screen vertically</li>
+    <li>Ctrl + w, v: open a new vertical viewport</li>
+    <li>Ctrl + w, s: open a new horizontal viewport</li>
+    <li>Ctrl + w, q: close current tab</li>
+    <li>Ctrl + w, o: close all but active window</li>
+    <li>Ctrl + w, =: resize viewports to be of equal size</li>
+    <li>Ctrl + w h/l/j/k: move one viewport left/right/below/above</li>
     <li>:wq - save and close file</li>
     <li>:e! - discard all unsaved changes (discard buffer and reopen file on disk)</li>
   </ul>

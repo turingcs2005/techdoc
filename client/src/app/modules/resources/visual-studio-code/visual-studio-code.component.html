@@ -94,8 +94,8 @@
             <li>
                 (Optional) Disable Vim's keyboard shotcuts to avoid conflict with VSC's shortcuts:
                 <ul>
-                    <li><span class="highlight">Ctrl + w</span>, to close tab. Fewer key strokes than Vim's :q!.</li>
-                    <li><span class="highlight">Ctrl + k</span>, Ctrl + k z toggles zen mode.</li>
+                    <li><span class="highlight">Ctrl + k</span>, Ctrl + k z toggles zen mode. In Vim, Ctrl + k is for entering digraphs 
+                        (special characters) which I never use.</li>
                 </ul>
                 <pre class="code">
 "vim.handleKeys": &#123;
@@ -152,9 +152,7 @@
             <li><span class="highlight">Ctrl + Shift + o</span>: show source code hierarchy for quick navigation</li>
             <li><span class="highlight">Ctrl + p</span>: quick search across source code files</li>
             <li><span class="highlight">Alt + tab number</span>: activate said tab, e.g. tab 1, 2, 3</li>
-            <li><span class="highlight">Ctrl + w</span>: close active tab (need to 
-                <span [routerLink]="['/technical-documentation/vim']" class="link">disable Ctrl + w</span> 
-                in Vim if you have Vim extension installed&mdash;see above under 'Vim extension')</li>
+            <li><span class="highlight">Ctrl + window number</span>: activate said window, e.g. window 1, 2, 3</li>
             <li><span class="faded">Ctrl + shift + a:</span> insert inline comment (works under Linux, but not Windows)</li>
             <li><span class="highlight">Ctrl + Shift + [</span>: collapse code block</li>
             <li><span class="highlight">Ctrl + Shift + ]</span>: expand code block</li>
@@ -162,6 +160,17 @@
 
     </mat-expansion-panel>
 
-
-
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Zen mode
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>Using Zen mode is completely optional. If you use Zen mode and Vim, you will want to display the bottom status bar as it displays Vim mode.</div>
+        <pre class="code">
+    "zenMode.hideStatusBar": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideTabs": false
+        </pre>
+    </mat-expansion-panel>
 
