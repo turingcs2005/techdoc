@@ -134,10 +134,10 @@ export const environment = &#123;
             On the back end, you need to make sure that Node.js is serving the compiled front end from the correct directory, i.e. 
             the same directory to which you copied the compiled Angular app in your Dockerfile:
             <pre class="code">
-// app.js file: serving Angular app from directory /app/dist
-app.use(express.static('./app/dist'));
+// app.js file: serving Angular app from directory /dist
+app.use(express.static('./dist'));
 app.all('/*', (req, res, next) => &#123;
-    res.sendFile('index.html', &#123;root: './app/dist'&#125;);
+    res.sendFile('index.html', &#123;root: './dist'&#125;);
 &#125;);
             </pre>
 
@@ -146,6 +146,9 @@ app.all('/*', (req, res, next) => &#123;
 // Dockerfile: copying from /app/dist/client on front end to /app/dist on back end
 COPY --from=client_build /app/dist/client /app/dist  
             </pre>
+            <div>In your docker image, /app is the root directory where both the compiled front end and the back end reside. As a result, 
+                you app.js serves the compiled Angular app from ./dist, not ./app/dist.
+            </div>
         </li>
     </ul>
 </mat-expansion-panel>
