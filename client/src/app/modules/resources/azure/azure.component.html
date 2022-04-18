@@ -56,25 +56,66 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <pre class="code">
-    # build front end
+    # Step 1: build client
     FROM node:16-alpine AS client_build
     WORKDIR /app
     COPY ./client /app/
     RUN npm install
     RUN node_modules/.bin/ng build
-    # build back end
+
+    # Step 2: copy compiled client into server &amp; build server
     FROM node:16-alpine AS server_build
     WORKDIR /app
     COPY ./server /app/
     COPY --from=client_build /app/dist/client /app/dist
     RUN npm install --production
-    # build docker
+
+    # Step 3: build vanilla alpine + Node.js image
     FROM alpine
     WORKDIR /app
     RUN apk add --no-cache nodejs
     COPY --from=server_build /app ./
-    CMD ["node", "./bin/www"]
-                </pre>
+    CMD ["node", "./bin/www"]</pre>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Step 1 folder structure
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <li class="with-icon"><mat-icon>folder</mat-icon> &nbsp; app</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; dist</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; node_modules</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; src</li>
+                <li class="with-icon left-padded"><mat-icon>description</mat-icon> &nbsp; root level 
+                    files, e.g. angular.json, package.json, etc.</li>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Step 2 folder structure
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <li class="with-icon"><mat-icon>folder</mat-icon> &nbsp; app</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; dist</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; node_modules</li>
+                <li class="with-icon left-padded"><mat-icon>folder</mat-icon> &nbsp; bin</li>
+                <li class="with-icon left-padded"><mat-icon>description</mat-icon> &nbsp; app.js</li>
+                <li class="with-icon left-padded"><mat-icon>description</mat-icon> &nbsp; root level 
+                    files &amp; directories, e.g. package.json</li>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Step 3 folder structure
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        Step 3 folder structure is exactly the same as step 2 folder structure. The only difference is 
+        that step 2 uses a pre-built Alpine + Node.js image, while step 3 uses vanilla Alpline image and 
+        then installs its own Node.js, omitting a large number of packages and further reducing image size.
+    </mat-expansion-panel>
             </mat-expansion-panel>
             
         </li>
