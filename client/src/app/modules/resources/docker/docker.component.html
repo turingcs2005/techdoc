@@ -153,6 +153,14 @@ docker image prune</pre>
 			<pre class="code">
 docker exec -it CONTAINER_NAME /bin/sh</pre>
 		</li>
+
+		<li>Inspect contents of a stopped docker container
+			<pre class="code">
+docker container create --name CONTAINER_NAME IMAGE_NAME
+docker container export CONTAINER_NAME > file.tar
+			</pre>
+			<div>Then you can inspect that .tar file under your GUI file system.</div>
+		</li>
 	</ol>
 
 	<p><span [routerLink]="['/resources/azure']" class="link">Azure deployment</span> section provides information on creating Dockerfile and .dockerignore.</p>
