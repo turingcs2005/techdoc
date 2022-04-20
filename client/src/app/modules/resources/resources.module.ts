@@ -13,6 +13,9 @@ import { Pm2Component } from './pm2/pm2.component';
 import { VimComponent } from './vim/vim.component';
 import { BashComponent } from './bash/bash.component';
 import { DockerComponent } from './docker/docker.component';
+import { RefactoringComponent } from './refactoring/refactoring.component';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { CrossTrainingComponent } from './cross-training/cross-training.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { DockerComponent } from './docker/docker.component';
     Pm2Component,
     VimComponent,
     BashComponent,
-    DockerComponent
+    DockerComponent,
+    RefactoringComponent,
+    DocumentationComponent,
+    CrossTrainingComponent
   ],
   imports: [
     CommonModule,

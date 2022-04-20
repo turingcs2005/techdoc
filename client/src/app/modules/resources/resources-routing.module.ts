@@ -3,10 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularComponent } from './angular/angular.component';
 import { AzureComponent } from './azure/azure.component';
 import { BashComponent } from './bash/bash.component';
+import { CrossTrainingComponent } from './cross-training/cross-training.component';
 import { DockerComponent } from './docker/docker.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 import { EmojiComponent } from './emoji/emoji.component';
 import { NodejsNpmComponent } from './nodejs-npm/nodejs-npm.component';
 import { Pm2Component } from './pm2/pm2.component';
+import { RefactoringComponent } from './refactoring/refactoring.component';
 import { ResourcesComponent } from './resources.component';
 import { VimComponent } from './vim/vim.component';
 import { VisualStudioCodeComponent } from './visual-studio-code/visual-studio-code.component';
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'pm2', component: Pm2Component },
   { path: 'bash', component: BashComponent },
   { path: 'docker', component: DockerComponent },
+  { path: 'refactoring', component: RefactoringComponent },
+  { path: 'documentation', component: DocumentationComponent },
+  { path: 'cross-training', component: CrossTrainingComponent }
 ];
 
 @NgModule({
