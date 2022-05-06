@@ -204,11 +204,11 @@ COPY --from=client_build /app/dist/client /app/dist
     Under your deployment root directory, execute: 
     <ol>
         <li class="code">az login</li>
-        <li class="code">sudo az acr login --name AZURE_DOCKER_REGISTRY (e.g. solutionscontainerregistry.azurecr.io)</li>
-        <li class="code">sudo docker build -t solutionscontainerregistry.azurecr.io/XXXXX . && sudo docker push solutionscontainerregistry.azurecr.io/XXXXX</li>
+        <li class="code">sudo az acr login --name AZURE_DOCKER_REGISTRY (e.g. solutionscontainerregistry) --subscription SUBSCRIPTION_ID</li>
+        <li class="code">sudo docker build -t solutionscontainerregistry.azurecr.io/XXXXX:tag . && sudo docker push solutionscontainerregistry.azurecr.io/XXXXX</li>
         <li>Log into Azure portal, select the correct app service (e.g. fac-uat), and click on 'Deployment Center' on left</li>
-        <li>Select image XXXXX (the image you built in step 3) and click on 'Save' on upper left</li>
-        <li>Once saving is finished, you can access your app with your LAN ID and password 'rsa123' in dev/uat; your LAN ID and 
+        <li>Select image XXXXX (the image you built in step 3), and Tag XXX and click on 'Save' on upper left,</li>
+        <li>Once saving is finished, go back to the overview section of your app service and click "Restart". Once the app is finished restarting, you can access your app with your LAN ID and password 'rsa123' in dev/uat; your LAN ID and 
             your enterprise password in prod (which you probably will never do unless you are a user yourself).
         </li>
         <li>To redeploy, rebuild docker image and save again. You may need to toggle 'continuous deployment'</li>
