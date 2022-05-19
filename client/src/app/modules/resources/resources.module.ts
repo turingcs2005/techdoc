@@ -16,6 +16,7 @@ import { DockerComponent } from './docker/docker.component';
 import { RefactoringComponent } from './refactoring/refactoring.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { CrossTrainingComponent } from './cross-training/cross-training.component';
+import { GitComponent } from './git/git.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CrossTrainingComponent } from './cross-training/cross-training.componen
     DockerComponent,
     RefactoringComponent,
     DocumentationComponent,
-    CrossTrainingComponent
+    CrossTrainingComponent,
+    GitComponent
   ],
   imports: [
     CommonModule,

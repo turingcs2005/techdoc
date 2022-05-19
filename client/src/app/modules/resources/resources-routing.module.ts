@@ -7,6 +7,7 @@ import { CrossTrainingComponent } from './cross-training/cross-training.componen
 import { DockerComponent } from './docker/docker.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { EmojiComponent } from './emoji/emoji.component';
+import { GitComponent } from './git/git.component';
 import { NodejsNpmComponent } from './nodejs-npm/nodejs-npm.component';
 import { Pm2Component } from './pm2/pm2.component';
 import { RefactoringComponent } from './refactoring/refactoring.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', component: ResourcesComponent },
   { path: 'visual-studio-code', component: VisualStudioCodeComponent },
   { path: 'vim', component: VimComponent },
+  { path: 'git', component: GitComponent },
   { path: 'angular', component: AngularComponent },
   { path: 'nodejs-npm', component: NodejsNpmComponent },
   { path: 'azure', component: AzureComponent },
