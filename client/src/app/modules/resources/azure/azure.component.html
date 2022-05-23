@@ -216,3 +216,115 @@ COPY --from=client_build /app/dist/client /app/dist
     </ol>
 </mat-expansion-panel>
 
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            4. Setup App Service and Networking in Azure
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    The following steps highlight setting up your App Service and networking for both Azure and Hanover, to connect the App Service to URL (<i>PROJECT_NAME.allmerica.com)</i>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Create Azure App Service
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+            <div><u>Basics</u></div>
+                <li>Project Details: Choose Subscription (ex: Commercial Lines - R&D) and Resource Group (eg: EnterpriseSolutions)</li>
+                <li>Instance Details: Under Publish, choose Docker Container, Linux as OS, and East US 2 for Region.</li>
+                <li>App Service Plan: Choose relevant App Service Plan (eg: CLDevAppService)</li>
+        
+            <br><div><u>Docker</u></div>
+                <li>Options: Choose Single container, and Azure Container Registry for Image Source</li>
+                <li>Azure container registry options: Choose the docker registry, image, and tag from the previous step (this can be changed/updated later)</li>
+            
+            <br><div><u>Monitoring (optional)</u></div>
+                <li>Enable Application insights can be enabled for better debugging </li>
+            
+            <br><div>Click <b>Review and Create</b></div>
+                <li>Once created, navigate to the Overview tab and add tags for BusinessUnit, CostCenter (345078), Department (Analytics), and Environment</li>
+        </ol>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Setup Networking (Internal - Azure)
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+            <div><u>Create Azure Private Endpoint</u></div>
+                <li>Open App Service and Navigate to <i>Networking</i></li>
+                <li>Under <i>Inbound Traffic</i>, Click into Private Endpoints, then Add</li>
+                <li>Name your Endpoint, and select the same Subscription as above (ex: Commercial Lines - R&D)</li>
+                <li>Select Virtual Network (ex: CL-RD-EastUS2-vnet) and Subnet (ex: trusted subnet 2)</li>
+                <li><b style="color:red">Make sure that "Integrate with private DNS Zone" is set to No</b></li>
+                <li>Click <b>Ok</b>. After creating, navigate to the Private Endpoint Overview, and verify the ResourceGroup is "NetworkServices"</li>
+
+            <br><div><u>Setup Vnet Integration</u></div>
+                <li>Return to App Service and Navigate to <i>Networking</i></li> 
+                <li>Under <i>Outbound Traffic</i>, Click into Vnet Inegration, then Add</li>  
+                <li>Select the same Virtual Network as the Private Endpoint (CL-RD-EastUS2-vnet)</li> 
+                <li>Select Existing Subnet, and choose one of the subnets listed under Available for Integration (trusted-subnet-1)</li>
+                <li>Click <b>Ok</b></li>
+
+            <br><div><u>Submit Request for Private Endpoint Integration with Azure's Core DNS </u></div>
+                <li>Return to App Service and navigate to <i>Networking</i></li>
+                <li>Copy the Private Endpoint Name and Inbound IP address from the <i>Inbound Traffic</i> section</li>
+                <li>Return to the <i>Overview</i> page, and copy the Subscription Name and Subscription ID</li>
+                <li>Go to the Technology Place and submit an "Other Request" at the bottom</li>
+                <li>Submit a Request Ticket with the information collected, and save the REQ# </li>
+                <pre class="code">Please link our “APP_SERVICE_NAME” Web App with the private endpoint “PRIVATE_ENDPOINT_NAME” to Azure core DNS:
+    
+    App Service Name: facreinsurance-dev
+    Private Endpoint Name: facreinsurance-dev
+    Subscription: Commercial Lines - R&D (da6c049b-87cd-4e56-b023-fd0b825d8c35)
+    Inbound IP Address: 10.93.3.37
+                </pre>
+
+                <br><li>Finally, send an email to Janar <i>(jperumalsam@hanover.com) </i> with the REQ# and let him know the same info</li>
+                
+        </ol>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Setup Networking (External - Hanover)
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+            <div><u>Submit Custom Domain Request</u></div>
+            <li>Return to App Service, and navigate to <i>Custom Domains</i></li>
+            <li>Copy the Custom Domain Verification ID</li>
+            <li>Navigate to <link href="http://netpub/netpub-cgi/ipmr.pl)">, list your email and select FreeForm for Function</li>
+            <li>Leave the other fields blank, and under Comment section submit this information:</li>
+            <pre class="code">
+External DNS Change.
+
+TXT asuid.APP_SERVICE_DOMAIN_NAME.allmerica.com    CUSTOM_DOMAIN_VERIFICATION_ID
+CNAME APP_SERVICE_DOMAIN_NAME.allmerica.com     APP_SERVICE_DOMAIN_NAME.azurewebsites.net
+
+Internal DNS
+
+A record
+APP_SERVICE_DOMAIN_NAME.allmerica.com 
+
+INBOUND_IP_ADDRESS</pre>
+            <small><i>Note: Requests are processed on Thursdays, and the SLA is 5 business days, so make sure to give plenty lead time</i></small><br>
+            <br><div><u>Setup Custom Domain in App Service</u></div>
+            <li>When the request is completed, return to App Service and navigate to <i>Custom Domains</i></li>
+            <li>Click Add Custom Domain, enter the App Service Domain Name, and verify Hostname Record Type is CNAME</li>
+            <li>Click Validate, and when validation passes, click <b>Ok</b></li>
+            
+            <br><div><u>You should be all set! If you run into issues, try the following:</u></div>
+            <li>Restart the App Service</li>
+            <li>If you or a business user gets the error message from F5 - <b>"Access to this page is blocked. Access was denied by a per-request policy."</b>, you'll need to request to be added to the LDAP group</li>
+            <pre class="code">
+DEV/UAT: cn=CAAMSTest,ou=GROUPS,ou=RISK,o=ALLMERICA 
+PROD: cn=CAAMSPROD,ou=GROUPS,ou=RISK,o=ALLMERICA</pre>
+        </ol>
+    </mat-expansion-panel>
+
+</mat-expansion-panel>
