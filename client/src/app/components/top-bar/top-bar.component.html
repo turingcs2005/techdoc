@@ -20,6 +20,7 @@
   <button mat-menu-item [matMenuTriggerFor]="deployemntMenu">Deployment</button>
   <button mat-menu-item [matMenuTriggerFor]="maintenanceMenu">Maintenance</button>
   <button mat-menu-item [matMenuTriggerFor]="miscellaneousMenu">Miscellaneous</button>
+  <button mat-menu-item [matMenuTriggerFor]="debuggingMenu">Debugging</button>
 </mat-menu>
 
 <mat-menu #introductionMenu="matMenu">
@@ -54,4 +55,9 @@
   <button mat-menu-item [routerLink]="['/resources/vim']" class="faded">Vim</button>
   <button mat-menu-item [routerLink]="['/resources/git']">Git</button>
   <button mat-menu-item [routerLink]="['/resources/emoji']" class="faded">Emoji</button>
+</mat-menu>
+
+<mat-menu #debuggingMenu="matMenu">
+  <button mat-menu-item [routerLink]="['/resources/front-end-debugging']">Front end</button>
+  <button mat-menu-item [routerLink]="['/resources/back-end-debugging']">Back end</button>
 </mat-menu>

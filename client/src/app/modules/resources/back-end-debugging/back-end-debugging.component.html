@@ -1,0 +1,57 @@
+<div class="mat-h1">Back End Debugging</div>
+
+<p>This section highilights best practices for Debugging and App Service Logging.</p>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Azure Log Stream 
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>If you want to monitor API logs in real time:</div>
+        <ol>
+            <li>Go to your Azure App Service</li>
+            <li>On the left side menu, navigate to <i>Log Stream</i> under the Monitoring section. This will show you a real time view of web traffic and any <span class="code">console.log</span> statements</li>
+            <small>Note: If you need to find logs from a previous point in time, follow the steps next section</small>
+        </ol>
+    </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                App Service Logs
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>If you want to capture API logs from a previous point in time:</div>
+        <small>Note: you will need to configure the App Service Logs before it will begin capturing any log files</small>
+        <br><br><mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Enable Azure App Service Logging
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ol>
+                <li>Go to your Azure App Service</li>
+                <li>On the left side menu, navigate to <i>App Service Logs</i> under the Monitoring section</li>
+                <li>Under <i>Application Logging</i>, select File System</li>
+                <li>Keep the <i>Quota</i> as 35 MB</li>
+                <li>Enter 7 days as the default <i>Retention Period</i></li>
+            </ol>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    View Docker LogFiles in your App Service's Kudu page
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ol>
+                <li>Go to your Azure App Service</li>
+                <li>On the left side menu, navigate to <i>Advanced Tools</i> under the Development Tools Section and click <b>Go</b>. This should navigate you to a Kudu page for your App Service</li>
+                <li>On the top Menu, click <i>Bash</i></li>
+                <div>(You can also view the Log Stream from this page if you want to watch the real time traffic.)</div>
+                <li>From here, you can <span class="code">cd LogFiles -> ls</span> to view the list of files</li>
+                <li>Use <span class="code">cat LOGFILE_NAME</span> to print the conents of the log file.</li>
+            </ol>
+        </mat-expansion-panel>
+    </mat-expansion-panel>

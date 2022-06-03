@@ -17,6 +17,8 @@ import { RefactoringComponent } from './refactoring/refactoring.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { CrossTrainingComponent } from './cross-training/cross-training.component';
 import { GitComponent } from './git/git.component';
+import { FrontEndDebuggingComponent } from './front-end-debugging/front-end-debugging.component';
+import { BackEndDebuggingComponent } from './back-end-debugging/back-end-debugging.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { GitComponent } from './git/git.component';
     RefactoringComponent,
     DocumentationComponent,
     CrossTrainingComponent,
-    GitComponent
+    GitComponent,
+    FrontEndDebuggingComponent,
+    BackEndDebuggingComponent
   ],
   imports: [
     CommonModule,
