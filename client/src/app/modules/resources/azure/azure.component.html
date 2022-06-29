@@ -207,7 +207,7 @@ COPY --from=client_build /app/dist/client /app/dist
         <li class="code">az login --use-device-code</li>
         <li class="code">sudo az acr login --name AZURE_DOCKER_REGISTRY (e.g. solutionscontainerregistry) --subscription SUBSCRIPTION_ID</li>
         <div>Subscription ID can be found in Azure portal.</div>
-        <li class="code">sudo docker build -t solutionscontainerregistry.azurecr.io/XXXXX . && sudo docker push solutionscontainerregistry.azurecr.io/XXXXX</li>
+        <li class="code">sudo docker build -t solutionscontainerregistry.azurecr.io/XXXXX:tagname . && sudo docker push solutionscontainerregistry.azurecr.io/XXXXX:tagname</li>
         <li>Log into Azure portal, select the correct app service (e.g. fac-uat), and click on 'Deployment Center' on left</li>
         <li>Select image XXXXX (the image you built in step 3), and Tag XXX and click on 'Save' on upper left,</li>
         <li>Once saving is finished, go back to the overview section of your app service and click "Restart". Once the app is finished restarting, you can access your app with your LAN ID and password 'rsa123' in dev/uat; your LAN ID and 
