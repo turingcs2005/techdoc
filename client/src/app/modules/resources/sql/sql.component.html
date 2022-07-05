@@ -1,0 +1,40 @@
+<p class="mat-h2">SQL</p>
+
+<p>Please use JavaScript (sequelize) in your projects as much as you can, as the syntax is clearer and the code much more concise. Use raw SQL when 
+	sequelize library does not provide what you need.</p>
+
+<p>SQL code examples can be found @ 
+	<span class="code">git@ssh.dev.azure.com:v3/HanoverSolutionsDevelopers/Solutions%20Developers/SQL_tutorial</span>. Feel free to clone and update 
+	the tutorial with your own examples. I have omitted SQL code on complex string manipulation and complex statistics&mdash;I believe another language such 
+	as Python can get the job done much faster and cleaner. If you are interested in advanced string manipulation and statistics, check out 
+	<a href="https://www.oreilly.com/library/view/sql-cookbook-2nd/9781492077435/" target=_blank class="link">SQL Cookbook (2nd edition, 2020)</a>.</p>
+
+<p>The example code are for PostgreSQL. The syntax differs from MS SQL very slightly.</p> 
+	
+<p>File q0 creates sample data tables for the remaining of the training. Files q1&ndash;q10 cover various SQL topics. Most of the code are self-explanatory. 
+	You should be able to figure out what the code do by reading the code and reviewing the results. I have also provided explanation in comments.
+</p>
+	
+<p>If you want to use MS SQL, please reach out to administrators at the data engineering team (Eric Naglieri or Daniel Lederman) to set up an MS SQL test 
+	database.</p>
+
+<p>To set up PostgreSQL development environment on the Ubuntu Linux virtual machine in Azure, please complete the following:</p>
+<ol>
+	<li>Ask either me (Rui), Margo or Jeff (or another administrator) to 
+		<ul>
+			<li>set up your user account</li>
+			<li>create your personal database in PostgreSQL</li>
+		</ul>
+	</li>
+	<li>Install PostgreSQL extension (by Chris Kolkman) in Visual Studio Code.</li>
+	<li>Create a new connection using your account created in step 1. PostgreSQL is served on default port 5432.</li>
+	<li>Optionally, if you find the Visual Studio Code extension insufficient, you may use pgAdmin4 installed on the Ubuntu server. pgAdmin4 offers more comprehensive 
+		database utilities via GUI (graphical user interface).
+	</li>
+	<li>When opening a new query file, you will see prompt 'Select Postgres Server' on Visual Studio Code bottom bar. Click to select your database, or you will receive 
+		an error message.</li>
+</ol>
+
+<p>Any questions, please reach out to Jeff, James or me.</p>
+
+

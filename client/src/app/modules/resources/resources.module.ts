@@ -19,6 +19,7 @@ import { CrossTrainingComponent } from './cross-training/cross-training.componen
 import { GitComponent } from './git/git.component';
 import { FrontEndDebuggingComponent } from './front-end-debugging/front-end-debugging.component';
 import { BackEndDebuggingComponent } from './back-end-debugging/back-end-debugging.component';
+import { SqlComponent } from './sql/sql.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { BackEndDebuggingComponent } from './back-end-debugging/back-end-debuggi
     CrossTrainingComponent,
     GitComponent,
     FrontEndDebuggingComponent,
-    BackEndDebuggingComponent
+    BackEndDebuggingComponent,
+    SqlComponent
   ],
   imports: [
     CommonModule,

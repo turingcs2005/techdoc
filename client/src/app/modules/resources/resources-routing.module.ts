@@ -14,6 +14,7 @@ import { NodejsNpmComponent } from './nodejs-npm/nodejs-npm.component';
 import { Pm2Component } from './pm2/pm2.component';
 import { RefactoringComponent } from './refactoring/refactoring.component';
 import { ResourcesComponent } from './resources.component';
+import { SqlComponent } from './sql/sql.component';
 import { VimComponent } from './vim/vim.component';
 import { VisualStudioCodeComponent } from './visual-studio-code/visual-studio-code.component';
 
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'documentation', component: DocumentationComponent },
   { path: 'cross-training', component: CrossTrainingComponent },
   { path: 'front-end-debugging', component: FrontEndDebuggingComponent },
-  { path: 'back-end-debugging', component: BackEndDebuggingComponent }
+  { path: 'back-end-debugging', component: BackEndDebuggingComponent },
+  { path: 'sql', component: SqlComponent }
 ];
 
 @NgModule({

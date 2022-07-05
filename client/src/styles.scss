@@ -72,6 +72,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .link {
   @extend .pointer;
   color: $accent;
+  text-decoration: none;
 }
 
 .left-padded {
