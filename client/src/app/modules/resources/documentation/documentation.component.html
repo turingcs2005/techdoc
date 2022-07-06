@@ -2,11 +2,18 @@
 
 <ul>
 	<li>User documentation (how to use the app) should be handled by business partners (subject matter expert).</li>
-	<li>Infrastructure documentation should be handled by an IT professional.</li>
-	<li>Developers should create technical documentation for a fellow developer of roughly equal skills.</li>
-	<li>Avoid detailed documentation&mdash;it becomes stale quickly as code change, and requires a huge effort to 
-		keep up-to-date.
+	<li>Infrastructure documentation should be handled by an IT professional. Margo can write some generic documentation on Azure.</li>
+	<li>Developers should create technical documentation for a fellow developer of roughly equal skills.
+		<ul>
+			<li>Avoid detailed documentation&mdash;it becomes stale quickly as code change, and requires a huge effort to keep the documentation up-to-date.</li>
+			<li>Prefered documentation formats: 
+				<ul>
+					<li>Material tree component for data structure.</li>
+					<li>.drawio charts for front end artifacts (modules, components, services) to keep track of their main functionalities.</li>
+					<li>.drawio charts for back end tables saved by the app to document schema, primary keys and foreign keys</li>
+					<li>Markdown file for high-level project documentation</li>
+				</ul>
+			</li>
+		</ul>
 	</li>
-	<li>Use high-level documentation such as .drawio chart with mouse-over tips.</li>
-	<li>Keep track of main functionalities of each file/module/service/component, etc.</li>
 </ul>

@@ -19,8 +19,8 @@
   <button mat-menu-item [matMenuTriggerFor]="backEndMenu">Back end</button>
   <button mat-menu-item [matMenuTriggerFor]="deployemntMenu">Deployment</button>
   <button mat-menu-item [matMenuTriggerFor]="maintenanceMenu">Maintenance</button>
-  <button mat-menu-item [matMenuTriggerFor]="miscellaneousMenu">Miscellaneous</button>
   <button mat-menu-item [matMenuTriggerFor]="debuggingMenu">Debugging</button>
+  <button mat-menu-item [matMenuTriggerFor]="miscellaneousMenu">Miscellaneous</button>
 </mat-menu>
 
 <mat-menu #introductionMenu="matMenu">
@@ -44,7 +44,7 @@
 </mat-menu>
 
 <mat-menu #maintenanceMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/resources/refactoring']">Code refactor</button>
+  <button mat-menu-item [routerLink]="['/resources/refactoring']">Code refactoring</button>
   <button mat-menu-item [routerLink]="['/resources/documentation']">Documentation</button>
   <button mat-menu-item [routerLink]="['/resources/cross-training']">Cross-training</button>
 </mat-menu>

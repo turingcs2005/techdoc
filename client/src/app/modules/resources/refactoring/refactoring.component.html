@@ -1,7 +1,16 @@
 <div class="mat-h1">Code refactoring</div>
 
+
 <ul>
-	<li>Refactor or even redesign part of your app if there's enough benefit.</li>
-	<li>Add comments when need arises (e.g. section of code that are long/obscure)</li>
-	<li>Use emoji + comment to highlight key code section (e.g. implementation of a key functionality)</li>
+	<li>Refactor or even redesign part of your app if there's enough benefit. A few examples:
+		<ul>
+			<li>Tree-traversing recursive function converts dollar strings to numbers for any tree-like data structure (trading client-side 
+				CPU cycles for code base reduction).
+				</li>
+			<li>Promise.all() enables Operating System multi-threading while saving data in a loop (order does not matter).</li>
+			<li>sequelize models + JavaScript functions reduce back end code by nearly 80% compared to using raw SQL queries.</li>
+		</ul>
+	</li>
+	<li>Add comments to code sections that difficult to digest.</li>
+	<li>Use emoji (e.g. 👍 👎 ⭐ 🔥 💩) + comments to highlight key code section (e.g. implementation of a key functionality)</li>
 </ul>
