@@ -10,6 +10,7 @@ import { DocumentationComponent } from './documentation/documentation.component'
 import { EmojiComponent } from './emoji/emoji.component';
 import { FrontEndDebuggingComponent } from './front-end-debugging/front-end-debugging.component';
 import { GitComponent } from './git/git.component';
+import { MongodbComponent } from './mongodb/mongodb.component';
 import { NodejsNpmComponent } from './nodejs-npm/nodejs-npm.component';
 import { Pm2Component } from './pm2/pm2.component';
 import { RefactoringComponent } from './refactoring/refactoring.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'cross-training', component: CrossTrainingComponent },
   { path: 'front-end-debugging', component: FrontEndDebuggingComponent },
   { path: 'back-end-debugging', component: BackEndDebuggingComponent },
-  { path: 'sql', component: SqlComponent }
+  { path: 'sql', component: SqlComponent },
+  { path: 'mongodb', component: MongodbComponent },
 ];
 
 @NgModule({

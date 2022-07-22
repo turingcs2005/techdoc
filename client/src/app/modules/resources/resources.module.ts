@@ -20,6 +20,7 @@ import { GitComponent } from './git/git.component';
 import { FrontEndDebuggingComponent } from './front-end-debugging/front-end-debugging.component';
 import { BackEndDebuggingComponent } from './back-end-debugging/back-end-debugging.component';
 import { SqlComponent } from './sql/sql.component';
+import { MongodbComponent } from './mongodb/mongodb.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SqlComponent } from './sql/sql.component';
     GitComponent,
     FrontEndDebuggingComponent,
     BackEndDebuggingComponent,
-    SqlComponent
+    SqlComponent,
+    MongodbComponent
   ],
   imports: [
     CommonModule,
